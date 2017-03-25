@@ -17,8 +17,23 @@ from matplotlib import style
 
 uniData=pd.read_html("http://blog.collegetuitioncompare.com/2013/01/us-top-100-college-tuition-comparison.html")
 # print (uniData[2])
-uniFees=(uniData[2][['Unnamed: 0','2017 Estimated Tuition & Fees','In-State','Out-of-State']])
+uniFees=(uniData[2][['Unnamed: 0','2016Tuition & Fees','2017 Estimated Tuition & Fees','In-State','Out-of-State']])
+
+# uniExtra=(uniData[2]['2016Tuition & Fees'])
+# # print uniExtra
+#
+# uniExtra.replace("-","0",inplace=True)
+# uniExtra=uniExtra.str.replace('$','')
+# uniExtra=uniExtra.str.replace(',','').astype(float)
+# print uniExtra.head()
+
+
+
 uniFees.replace("-","0",inplace=True)
+uniFees['2016Tuition & Fees']=uniFees['2016Tuition & Fees'].str.replace('$','')
+uniFees['2016Tuition & Fees']=uniFees['2016Tuition & Fees'].str.replace(',','').astype(float)
+
+
 uniFees['2017 Estimated Tuition & Fees']=uniFees['2017 Estimated Tuition & Fees'].str.replace('$','')
 uniFees['2017 Estimated Tuition & Fees']=uniFees['2017 Estimated Tuition & Fees'].str.replace(',','').astype(float)
 
@@ -31,7 +46,7 @@ uniFees['Out-of-State']=uniFees['Out-of-State'].str.replace(',','').astype(float
 
 # print (uniFees.dtypes)
 
-
+print uniFees
 
 # ********************ALTER LIVING COSTS*****************
 uniLivingCost=(uniData[3][['Unnamed: 0','On-Campus','Off-campus']])
@@ -47,6 +62,19 @@ uniLivingCost['On-Campus']=uniLivingCost['On-Campus'].str.replace(',','').astype
 uniLivingCost['Off-campus']=uniLivingCost['Off-campus'].str.replace('$','')
 uniLivingCost['Off-campus']=uniLivingCost['Off-campus'].str.replace(',','').astype(float)
 
+
+# *************GETTING MISSING DATA*********
+
+uniFees.loc[uniFees['2017 Estimated Tuition & Fees'] == 0, '2017 Estimated Tuition & Fees'] = (uniFees['2016Tuition & Fees'])+2000
+
+uniLivingCost.loc[uniLivingCost['Off-campus'] == 0, 'Off-campus'] = (uniLivingCost['On-Campus'])-1000
+
+
+
+
+# ***********GET INSTATE AND OUTSTATE FILL NA***************
+uniFees['In-State'].fillna(value=uniFees['2017 Estimated Tuition & Fees'],inplace=True)
+uniFees['Out-of-State'].fillna(value=uniFees['2017 Estimated Tuition & Fees'],inplace=True)
 
 
 # uniLivingCost['Off-campus']=(uniLivingCost['Off-campus'])+2
