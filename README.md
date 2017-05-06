@@ -13,9 +13,9 @@ rates. I used Python Pandas for Data Analysis and Matplotlib for Data Visualizat
 1.) Clone the project <br>
 2.) Open the project folder, run these commands in the terminal- <br>
 
-    apt-get install python-tk <br>
-    pip install pandas <br>
-    pip install lxml <br>
-    pip install html5lib <br>
-    pip install BeautifulSoup4 <br>
+    apt-get install python-tk 
+    pip install pandas
+    pip install lxml 
+    pip install html5lib >
+    pip install BeautifulSoup4
 
