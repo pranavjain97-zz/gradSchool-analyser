@@ -19,3 +19,6 @@ rates. I used Python Pandas for Data Analysis and Matplotlib for Data Visualizat
     pip install html5lib >
     pip install BeautifulSoup4
 
+<h2> Screenshots </h2>
+
+![alt text](https://raw.githubusercontent.com/pranavjain97/pranavjain97.github.io/master/img/projects/grad.png)
